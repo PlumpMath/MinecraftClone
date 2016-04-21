@@ -1,0 +1,11 @@
+body {
+    margin: 0;
+    height: 600;
+    width: 800;
+    overflow: hidden;
+}
+
+canvas {
+    height: 100%;
+    width: 100%;
+}
