@@ -1,11 +1,14 @@
 var gulp = require('gulp');
 var babel = require('gulp-babel');
+var childProcess = require('child_process');
 
-gulp.watch("src/**/*.js", ['default']);
-gulp.watch("src/**/*.html", ['default']);
-gulp.watch("src/**/*.css", ['default']);
+gulp.task('watch', function() {
+  gulp.watch("src/**/*.js", ['build']);
+  gulp.watch("src/**/*.html", ['build']);
+  gulp.watch("src/**/*.css", ['build']);
+});
 
-gulp.task('default', function() {
+gulp.task('build', function() {
   gulp.src("src/index.html").pipe(gulp.dest("build"));
   gulp.src("src/styles/*.css").pipe(gulp.dest("build/styles"));
   return gulp.src("src/**/*.js")
@@ -14,7 +17,7 @@ gulp.task('default', function() {
 });
 
 gulp.task('start', ['build', 'watch'], function () {
-    childProcess.spawn(electron, ['./build'], {
+    childProcess.spawn('electron', ['./build'], {
         stdio: 'inherit'
     })
     .on('close', function () {
